@@ -705,28 +705,33 @@ def create_table():
 
 # Remove a student info in the database
 def remove_one_item():
-    selected = treeview_students.selection()[0]
-    treeview_students.delete(selected)
+    response = messagebox.askyesno(
+        "WARNING!",
+        "Are you sure you want to delete this data from the table?",
+    )
+    if response == 1:
+        selected = treeview_students.selection()[0]
+        treeview_students.delete(selected)
 
-    id_to_delete = idnumber_entry.get()
-    # Create a new database or connect to one that exists
-    conn = sqlite3.connect("student_list_treeview_CRUDL.db")
-    # Create a cursor instance
-    cursor = conn.cursor()
+        id_to_delete = idnumber_entry.get()
+        # Create a new database or connect to one that exists
+        conn = sqlite3.connect("student_list_treeview_CRUDL.db")
+        # Create a cursor instance
+        cursor = conn.cursor()
 
-    # Delete Student Info
-    cursor.execute("DELETE FROM students WHERE idnumber like?", ((id_to_delete,)))
+        # Delete Student Info
+        cursor.execute("DELETE FROM students WHERE idnumber like?", ((id_to_delete,)))
 
-    # Commit changes
-    conn.commit()
+        # Commit changes
+        conn.commit()
 
-    # Close our connection
-    conn.close()
-    # Clear Entry Boxes
-    clear_entries()
+        # Close our connection
+        conn.close()
+        # Clear Entry Boxes
+        clear_entries()
 
-    # Add a little message box for fun
-    messagebox.showinfo("Deleted!", "Student Info Has Been Deleted!")
+        # Add a little message box for fun
+        messagebox.showinfo("Deleted!", "Student Info Has Been Deleted!")
 
 
 # Removing a course info
