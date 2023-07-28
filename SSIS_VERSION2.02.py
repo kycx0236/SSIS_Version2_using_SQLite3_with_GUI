@@ -1012,7 +1012,7 @@ def add_new_student():
     cursor = conn.cursor()
     id_verifier = idnumber_entry.get()
     code_verifier = course_code_entry.get()
-    if unique_id_verifier(id_verifier):
+    if unique_id_verifier(id_verifier) and id_verifier != "":
         print(unique_id_verifier)
         if unique_code_verifier(code_verifier):
             messagebox.showinfo(
@@ -1061,7 +1061,7 @@ def add_new_course():
     cursor = conn.cursor()
 
     code_verifier = course_codes_entry.get()
-    if unique_code_verifier(code_verifier):
+    if unique_code_verifier(code_verifier) and code_verifier != "":
         print(unique_code_verifier(code_verifier))
         # Adding New Course
         cursor.execute(
